@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+}
+body{
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    font-family: 'Roboto';
+}
+.content {
+    width: 450px;
+    height: 450px;
+    outline: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+}
+.finished{
+    pointer-events: none;
+}
+.area {
+    flex: 0 0 150px;
+    height: 150px;
+    border: 1px solid black;
+    position: relative;
+    cursor: pointer;
+}
+.area:hover {
+    background-color: rgb(243, 243, 243);
+}
+.used, .used:hover{
+    cursor: auto;
+    background-color: white;
+}
+.X::before{
+    content: "";
+    width: 80%;
+    height: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    position: absolute;
+    background-color: black;
+}
+.X::after {
+    content: "";
+    width: 80%;
+    height: 5px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    position: absolute;
+    background-color: black;
+}
+
+.O::before{
+    content: "";
+    width: 75%;
+    height: 75%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    border: 5px solid black;
+    border-radius: 50%;
+}
+.result{
+    font-size: 24px;
+    text-align: center;
+    height: auto;
+}
