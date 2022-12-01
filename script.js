@@ -1,13 +1,50 @@
 const content = document.querySelector(".content");
 const result = document.querySelector(".result");
+const scoreX = document.querySelector(".score-x");
+const scoreO = document.querySelector(".score-o");
+const resetBtn = document.querySelector(".button");
 
 let playersMove = "X";
-const map = ["", "", "", "", "", "", "", "", ""];
+let map = ["", "", "", "", "", "", "", "", ""];
+const score = [0, 0];
 
-for (let i = 1; i <= 9; i++) {
-    const area = document.createElement("div");
-    area.classList.add("area");
-    content.append(area);
+function startGame() {
+    content.innerHTML = "";
+    content.classList.remove("finished");
+    playersMove = "X";
+    result.innerHTML = `Наразі ходить гравець ${playersMove}`;
+    map = ["", "", "", "", "", "", "", "", ""];
+    fillContent();
+
+    content.addEventListener("click", function (e) {
+        let cellIndex = [...this.children].findIndex((el) => el == e.target);
+        const target = e.target;
+
+        if (target.classList.value !== "area") {
+            return;
+        }
+        target.classList.add("used");
+
+        if (playersMove === "X") {
+            target.classList.add("X");
+        } else {
+            target.classList.add("O");
+        }
+        if (checkMap(cellIndex)) {
+            finishGame();
+            return;
+        }
+        changePlayer();
+    });
+}
+startGame();
+
+function fillContent() {
+    for (let i = 1; i <= 9; i++) {
+        const area = document.createElement("div");
+        area.classList.add("area");
+        content.append(area);
+    }
 }
 
 function changePlayer() {
@@ -31,29 +68,18 @@ function checkMap(index) {
 
     if (map[0] === playersMove && map[4] === playersMove && map[8] === playersMove) return true;
     if (map[2] === playersMove && map[4] === playersMove && map[6] === playersMove) return true;
+
+    if (!map.includes("")) return true;
 }
 
 function finishGame() {
     content.classList.add("finished");
+    if (!map.includes("")) return (result.innerHTML = "Нічия!");
+    if (playersMove === "X") {
+        scoreX.innerHTML = `X: ${(score[0] += 1)}`;
+    } else {
+        scoreO.innerHTML = `O: ${(score[1] += 1)}`;
+    }
     return (result.innerHTML = `Переміг гравець ${playersMove}`);
 }
-
-content.addEventListener("click", function handleClick(e) {
-    let cellIndex = [...this.children].findIndex((el) => el == e.target);
-    const target = e.target;
-    if (target.classList.value !== "area") {
-        return;
-    }
-    target.classList.add("used");
-    if (playersMove === "X") {
-        target.classList.add("X");
-    } else {
-        target.classList.add("O");
-    }
-    if (checkMap(cellIndex)) {
-        finishGame();
-        content.removeEventListener("click", handleClick);
-        return;
-    }
-    changePlayer();
-});
+resetBtn.addEventListener("click", startGame);

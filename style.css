@@ -14,7 +14,23 @@ body{
     align-items: center;
     gap: 50px;
     font-family: 'Roboto';
+    width: 450px;
+    margin: 0 auto;
 }
+.score{
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 24px;
+}
+.score-xo{
+    display: flex;
+}
+.score-x{
+    height: auto;
+}
+.score-o{    height: auto;}
 .content {
     width: 450px;
     height: 450px;
@@ -71,8 +87,32 @@ body{
     border: 5px solid black;
     border-radius: 50%;
 }
+.actions{
+    height: auto;
+    display: flex;
+
+    width: 450px;
+}
 .result{
     font-size: 24px;
-    text-align: center;
+
     height: auto;
+    flex: 0 1 auto;
+}
+.button{
+    width: 120px;
+    height: 35px;
+    background-color: cornflowerblue;
+    border: 1px solid cornflowerblue;
+    border-radius: 5px;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all ease .25s;
+
+}
+.button:hover{
+    background-color: white;
+    color: cornflowerblue;
+
 }
